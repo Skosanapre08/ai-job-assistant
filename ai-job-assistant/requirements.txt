@@ -1,0 +1,7 @@
+streamlit
+ollama
+pypdf
+fpdf2
+plotly
+pandas
+pathlib

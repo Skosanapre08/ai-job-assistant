@@ -1,0 +1,52 @@
+PRECIOUS NOSIPHO SKOSANA 
+Computer Systems Engineering Graduate | Junior Consulting Developer 
+Johannesburg, Gauteng, South Africa 
+Cell: 079 736 5069 | Email: preciousskosana08@gmail.com 
+LinkedIn: linkedin.com/in/nosipho-skosana-47a29920b | GitHub: github.com/Skosanapre08 
+PROFESSIONAL SUMMARY 
+Computer Systems Engineering graduate from Vaal University of Technology with a 
+completed Diploma and currently completing an Advanced Diploma in 2026. Practical 
+experience in software development, automation, databases, APIs, cloud technologies and 
+system integration. Experienced with Python, JavaScript, Node.js, Flask, SQL, MongoDB 
+and Azure/Entra ID. Strong in testing, troubleshooting and technical documentation, with a 
+willingness to learn new technologies and develop consulting skills. 
+TECHNICAL SKILLS 
+Programming: Python, C++, JavaScript, SQL 
+Development: Node.js, Flask, HTML, CSS, REST APIs 
+Cloud & Automation: Azure, Entra ID, Azure App Services, Identity Automation 
+Databases: MySQL, MongoDB, SQLite 
+Tools: Git, GitHub, Linux, Windows, Microsoft 365 
+Other: Testing, Debugging, Documentation, System Integration, Networking 
+EDUCATION 
+Vaal University of Technology 
+Advanced Diploma in Computer Systems Engineering — 2026 (Currently Completing) 
+Diploma in Computer Systems Engineering — Completed 2025 
+Lilanga Secondary School 
+National Senior Certificate — 2016 
+CERTIFICATIONS 
+ Microsoft Certified: Azure Developer Associate (AZ-204) 
+ Cisco Certified Network Associate (CCNA) 
+PROJECTS 
+Azure AD Account Provisioning Toolkit 
+ Developed an Azure/Entra ID automation solution for account provisioning and 
+identity management. Entra ID User Lifecycle Automation 
+ Developed automation for managing user lifecycle activities in Microsoft Entra ID. 
+Lifestyle Survey Web App 
+ Developed a Node.js and MongoDB web application with database integration and 
+testing. 
+Digital Employee Sign-In System 
+ Developed a Flask and MySQL application for employee sign-in management. 
+EXPERIENCE 
+Scaw Metals Group — IT Support Intern | 2025 
+ Provided support for Windows, Microsoft 365, Outlook, printers and user systems. 
+ Assisted with network troubleshooting, software testing, documentation and technical 
+queries. 
+Resolution Circle — Computer Systems Engineering Intern | 2024 
+ Gained practical experience in software, networking, embedded systems and 
+troubleshooting. 
+ Worked with microcontrollers, ESP32/Arduino and technical documentation. 
+KEY STRENGTHS 
+Problem-solving • Teamwork • Communication • Accountability • Attention to detail • 
+Adaptability • Willingness to learn • Troubleshooting • Technical documentation 
+References available upon request 
+ 
