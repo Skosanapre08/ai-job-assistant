@@ -51,8 +51,9 @@ def get_metrics():
     conn.close()
     return total, interviewing, offers, rejected
 
-def call_gemini_with_retry(prompt, max_retries=3):
-    models_to_try = ["gemini-2.5-flash", "gemini-flash-latest", "gemini-1.5-flash"]
+def call_gemini_with_retry(prompt, max_retries=2):
+    # Try multiple models - flash-lite has 1000 requests/day (vs 20 for flash)
+    models_to_try = ["gemini-2.5-flash-lite", "gemini-2.5-flash", "gemini-flash-latest"]
     last_error = None
     for model_name in models_to_try:
         for attempt in range(max_retries):
@@ -68,6 +69,9 @@ def call_gemini_with_retry(prompt, max_retries=3):
                 if "503" in err_str or "UNAVAILABLE" in err_str or "overloaded" in err_str.lower():
                     time.sleep(3)
                     continue
+                elif "429" in err_str or "RESOURCE_EXHAUSTED" in err_str:
+                    # Rate limit hit - try next model instead of waiting
+                    break
                 elif "404" in err_str or "NOT_FOUND" in err_str:
                     break
                 else:
