@@ -1,14 +1,13 @@
 import streamlit as st
-from google import genai
+from groq import Groq
 import sqlite3
 from datetime import datetime
 from pypdf import PdfReader
 import io
-import time
 
-# Read API key from Streamlit Cloud Secrets (safe, not visible in code)
-api_key = st.secrets["GEMINI_API_KEY"]
-client = genai.Client(api_key=api_key)
+# Read API key from Streamlit Cloud Secrets
+api_key = st.secrets["GROQ_API_KEY"]
+client = Groq(api_key=api_key)
 
 DB_FILE = "applications.db"
 
@@ -51,38 +50,18 @@ def get_metrics():
     conn.close()
     return total, interviewing, offers, rejected
 
-def call_gemini_with_retry(prompt, max_retries=2):
-    # Try multiple models - flash-lite has 1000 requests/day (vs 20 for flash)
-    models_to_try = ["gemini-2.5-flash-lite", "gemini-2.5-flash", "gemini-flash-latest"]
-    last_error = None
-    for model_name in models_to_try:
-        for attempt in range(max_retries):
-            try:
-                response = client.models.generate_content(
-                    model=model_name,
-                    contents=prompt
-                )
-                return response.text
-            except Exception as e:
-                last_error = e
-                err_str = str(e)
-                if "503" in err_str or "UNAVAILABLE" in err_str or "overloaded" in err_str.lower():
-                    time.sleep(3)
-                    continue
-                elif "429" in err_str or "RESOURCE_EXHAUSTED" in err_str:
-                    # Rate limit hit - try next model instead of waiting
-                    break
-                elif "404" in err_str or "NOT_FOUND" in err_str:
-                    break
-                else:
-                    raise e
-    raise last_error if last_error else Exception("All models failed")
+def call_groq(prompt):
+    response = client.chat.completions.create(
+        model="llama-3.1-8b-instant",
+        messages=[{"role": "user", "content": prompt}]
+    )
+    return response.choices[0].message.content
 
 init_db()
 
 st.set_page_config(page_title="AI-Powered Job Application Assistant", layout="wide")
 st.title("AI-Powered Job Application Assistant")
-st.write("Powered by **Google Gemini** | Deployed on Streamlit Cloud")
+st.write("Powered by **Groq AI** | Deployed on Streamlit Cloud")
 
 with st.sidebar:
     st.header("📄 Your Profile")
@@ -135,7 +114,7 @@ with tab1:
             st.error(f"❌ Missing fields: {missing}")
         else:
             cv_context = st.session_state.get('cv_text', '')
-            with st.spinner("🤖 Gemini is writing..."):
+            with st.spinner("🤖 Groq AI is writing..."):
                 try:
                     if analyze_jd:
                         prompt = f"List the top 7 required skills from this job description as a bulleted list:\n\n{job_description}"
@@ -147,7 +126,7 @@ with tab1:
                         prompt = f"Rewrite the professional summary and top 5 skills to match this job. Make it ATS-friendly.\n\nCV: {cv_context}\n\nJob: {job_description}"
                         task = "CV Summary"
 
-                    result_text = call_gemini_with_retry(prompt)
+                    result_text = call_groq(prompt)
 
                     if not analyze_jd:
                         add_application(company_name, job_role, result_text)
